@@ -1,11 +1,18 @@
 import React from 'react';
-import { Hello } from './Hello.jsx';
-import { Info } from './Info.jsx';
+import {useTracker} from 'meteor/react-meteor-data'
 
-export const App = () => (
-  <div>
-    <h1>Welcome to Meteor!</h1>
-    <Hello/>
-    <Info/>
-  </div>
-);
+import Account from "./Account";
+import {AccountCollection} from "../api/AccountCollection";
+
+export const App = () => {
+  const accounts = useTracker(() => AccountCollection.find({}).fetch());
+
+  return (
+    <div>
+      <h1>Welcome to Meteor!</h1>
+
+      {accounts.map(account => <Account key={account._id} account={account}/>)}
+
+    </div>
+  )
+};
