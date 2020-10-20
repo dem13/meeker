@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import {AccountCollection} from "../api/AccountCollection";
+import {AccountCollection} from "../../api/AccountCollection";
 
 const AccountForm = () => {
   const [title, setTitle] = useState("");

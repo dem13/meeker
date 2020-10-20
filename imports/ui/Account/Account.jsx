@@ -2,9 +2,9 @@ import React from 'react';
 
 const Account = ({account}) => {
   return (
-    <li>
+    <div className="account-item">
       {account.title}
-    </li>
+    </div>
   );
 };
 
