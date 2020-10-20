@@ -1,4 +1,53 @@
+@import url('https://fonts.googleapis.com/css2?family=Overpass&display=swap');
+
+@font-face {
+    font-family: "Bungee";
+    src: url("/fonts/Bungee/Bungee-Regular.ttf");
+}
+
+* {
+    box-sizing: border-box;
+}
+
+html, body {
+    padding: 0;
+    margin: 0;
+}
+
 body {
-  padding: 10px;
-  font-family: sans-serif;
+    background: #e2e8ce;
+    color: #262626;
+    font-family: "Overpass", sans-serif;
+    font-weight: 400;
+    font-size: 16px;
+}
+
+header {
+    display: flex;
+    height: 70px;
+    background: #acbfa4;
+    vertical-align: middle;
+    border-bottom: 5px solid #ff7f11;
+    font-family: Bungee;
+}
+
+.header-logo {
+    display: flex;
+}
+
+.header-logo-img {
+    width: 70px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    padding-left: 10px;
+}
+
+.header-logo-img img {
+    height: 100%;
+}
+
+.header-logo-title {
+    font-weight: bold;
+    font-size: 24px;
+    line-height: 70px;
 }
