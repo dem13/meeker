@@ -51,3 +51,67 @@ header {
     font-size: 24px;
     line-height: 70px;
 }
+
+main {
+    margin: auto;
+    width: 100%;
+    max-width: 800px;
+}
+
+.home {
+    padding-top: 40px;
+}
+
+.account-search {
+    padding-top: 10px;
+    padding-bottom: 10px;
+    text-align: center;
+}
+
+.account-search input {
+    outline: none!important;
+    font-size: 20px;
+    padding: 8px;
+    border: 3px solid #ff7f11;
+    border-radius: 4px;
+    min-width: 400px;
+    background: #e2e8ce;
+}
+
+.account-list {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.account-item {
+    min-width: 140px;
+    height: 70px;
+    margin: 20px;
+    border-radius: 2px;
+    box-shadow: 4px 2px 10px #aaaaaa,inset 0 0 0 2px #ff7f11;
+    text-align: center;
+    overflow: hidden;
+    cursor: pointer;
+}
+
+.account-item:hover .account-item-replace {
+    transform: translateY(-100%);
+}
+
+.account-item-title {
+    padding-left: 4px;
+    padding-right: 4px;
+    line-height: 70px;
+    height: 70px;
+    font-weight: bold;
+}
+
+.account-item-replace {
+    line-height: 70px;
+    height: 70px;
+    background: #ff7f11;
+    color: #ffffff;
+    transition: transform .25s;
+    font-weight: bold;
+}
