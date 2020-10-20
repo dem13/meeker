@@ -2,6 +2,7 @@ import React from 'react';
 import {useTracker} from 'meteor/react-meteor-data'
 
 import Account from "./Account";
+import AccountForm from "./AccountForm";
 import {AccountCollection} from "../api/AccountCollection";
 
 export const App = () => {
@@ -11,8 +12,11 @@ export const App = () => {
     <div>
       <h1>Welcome to Meteor!</h1>
 
-      {accounts.map(account => <Account key={account._id} account={account}/>)}
+      <AccountForm/>
 
+      <ul>
+        {accounts.map(account => <Account key={account._id} account={account}/>)}
+      </ul>
     </div>
   )
 };
