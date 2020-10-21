@@ -98,6 +98,9 @@ main {
 .account-item:hover .account-item-replace {
     transform: translateY(-100%);
 }
+.account-item:hover .account-item-title {
+    transform: translateY(-100%);
+}
 
 .account-item-title {
     padding-left: 4px;
@@ -105,6 +108,7 @@ main {
     line-height: 70px;
     height: 70px;
     font-weight: bold;
+    transition: transform .25s;
 }
 
 .account-item-replace {
