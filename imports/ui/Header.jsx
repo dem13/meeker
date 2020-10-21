@@ -1,6 +1,6 @@
 import React from 'react';
 
-const Header = () => {
+const Header = ({user, logout}) => {
   return (
     <header>
       <div className="header-item header-logo">
@@ -9,6 +9,15 @@ const Header = () => {
         </div>
         <div className="header-logo-title">
           MEEKER
+        </div>
+      </div>
+      <div className="header-item header-right">
+        <div className="header-nav">
+          {user ?
+            <div className="header-button" onClick={logout}>
+              Logout
+            </div> : ''
+          }
         </div>
       </div>
     </header>
