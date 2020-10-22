@@ -1,24 +1,66 @@
 import React, {useState} from 'react';
-import {AccountCollection} from "../../api/AccountCollection";
 
-const AccountForm = () => {
-  const [title, setTitle] = useState("");
+const AccountForm = ({created}) => {
+  const [account, setAccount] = useState({
+    title: '',
+    password: '',
+    secret: ''
+  })
 
-  const handleSubmit = e => {
+
+  const submit = e => {
     e.preventDefault();
 
-    if (!title) return;
+    Meteor.call('accounts.insert', account);
 
-    AccountCollection.insert({title, createdAt: new Date()});
+    created();
 
-    setTitle("");
-  }
+    setAccount({
+      title: '',
+      password: '',
+      secret: ''
+    });
+  };
 
   return (
-    <form className="account-form" onSubmit={handleSubmit}>
-      <input type="text" value={title} onChange={(e) => setTitle(e.target.value)}/>
+    <form className="account-form" onSubmit={submit}>
+      <div className="account-form-header">
+        Create Account
+      </div>
 
-      <button type="submit" >Add</button>
+      <div className="account-form-row">
+        <input
+          type="text"
+          name="title"
+          placeholder="Title"
+          value={account.title}
+          onChange={e => setAccount({...account, title: e.target.value})}
+          required/>
+      </div>
+
+      <div className="account-form-row">
+        <input
+          type="password"
+          name="password"
+          placeholder="Password"
+          value={account.password}
+          onChange={e => setAccount({...account, password: e.target.value})}
+          required/>
+      </div>
+
+      <div className="account-form-row">
+        <input
+          type="password"
+          name="secret"
+          placeholder="Secret Key"
+          value={account.secret}
+          onChange={e => setAccount({...account, secret: e.target.value})}
+          required/>
+      </div>
+
+      <div className="account-form-row">
+        <button type="submit">Create</button>
+      </div>
     </form>
   );
 };

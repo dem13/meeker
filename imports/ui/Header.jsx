@@ -1,6 +1,6 @@
-import React from 'react';
+import React, {Fragment} from 'react';
 
-const Header = ({user, logout}) => {
+const Header = ({user, createAccount, logout}) => {
   return (
     <header>
       <div className="header-item header-logo">
@@ -12,11 +12,21 @@ const Header = ({user, logout}) => {
         </div>
       </div>
       <div className="header-item header-right">
+
         <div className="header-nav">
+
           {user ?
-            <div className="header-button" onClick={logout}>
-              Logout
-            </div> : ''
+            (
+              <Fragment>
+                <div className="header-button" onClick={createAccount}>
+                  Create Account
+                </div>
+
+                <div className="header-button" onClick={logout}>
+                  Logout
+                </div>
+              </Fragment>
+            ) : ''
           }
         </div>
       </div>

@@ -8,11 +8,11 @@ const LoginForm = () => {
   const submit = e => {
     e.preventDefault();
 
-    Meteor.loginWithPassword(username, password);
-
-    if (!Meteor.user()) {
-      setError("Invalid username or password")
-    }
+    Meteor.loginWithPassword(username, password, error => {
+      if(error) {
+        setError("Invalid username or password")
+      }
+    });
   };
 
   return (
