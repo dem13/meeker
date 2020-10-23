@@ -8,7 +8,23 @@ import AccountList from "../Account/AccountList";
 const Home = () => {
   const [search, setSearch] = useState("");
 
-  const accounts = useTracker(() => AccountsCollection.find({title: {$regex: search, $options: "i"}}).fetch());
+  const {accounts, isLoading} = useTracker(() => {
+    const noDataAvailable = {accounts: []};
+
+    if(!Meteor.user()) {
+      return noDataAvailable;
+    }
+
+    const handler = Meteor.subscribe('accounts');
+
+    if(!handler.ready()) {
+      return {...noDataAvailable, isLoading: true}
+    }
+
+    const accounts = AccountsCollection.find({title: {$regex: search, $options: "i"}}).fetch();
+
+    return {accounts};
+  });
 
   const searchChangeHandler = (e) => setSearch(e.target.value);
 
