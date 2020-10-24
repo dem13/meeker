@@ -1,8 +1,9 @@
 import {check} from "meteor/check";
 import {AccountsCollection} from "../db/AccountsCollection";
+import {encrypt} from '../helpers/encryptor';
 
 Meteor.methods({
-  'accounts.insert'(accountData) {
+  async 'accounts.insert'(accountData) {
     check(accountData, {
       title: String,
       password: String,
@@ -13,12 +14,7 @@ Meteor.methods({
       throw new Meteor.Error("Not authorized.");
     }
 
-    /**
-     * @todo Encrypt password
-     *
-     * @type {string}
-     */
-    accountData.password = "encrypted"
+    accountData.password = await encrypt(accountData.password, accountData.secret);
 
     delete accountData.secret;
 
