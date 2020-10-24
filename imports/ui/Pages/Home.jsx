@@ -4,9 +4,13 @@ import AccountSearchInput from "../Account/AccountSearchInput";
 import {AccountsCollection} from "../../db/AccountsCollection";
 import {useTracker} from 'meteor/react-meteor-data'
 import AccountList from "../Account/AccountList";
+import AccountModal from "../Account/AccountModal";
+import AccountPanel from "../Account/AccountPanel";
 
 const Home = () => {
   const [search, setSearch] = useState("");
+  const [showAccountModal, setShowAccountModal] = useState(false);
+  const [selectedAccount, setSelectedAccount] = useState(null);
 
   const {accounts, isLoading} = useTracker(() => {
     const noDataAvailable = {accounts: []};
@@ -28,11 +32,25 @@ const Home = () => {
 
   const searchChangeHandler = (e) => setSearch(e.target.value);
 
+  const accountClickedHandler = (account) => {
+    setSelectedAccount(account);
+    setShowAccountModal(true)
+  };
+
+  const accountModalClosedHandler = () => {
+    setSelectedAccount(null);
+    setShowAccountModal(false);
+  }
+
   return (
     <div className="home">
       <AccountSearchInput search={search} changed={searchChangeHandler}/>
 
-      <AccountList accounts={accounts}/>
+      <AccountList accountClicked={accountClickedHandler} accounts={accounts}/>
+
+      <AccountModal show={showAccountModal} closed={accountModalClosedHandler}>
+        {selectedAccount ? <AccountPanel account={selectedAccount}/> : null}
+      </AccountModal>
     </div>
   );
 };

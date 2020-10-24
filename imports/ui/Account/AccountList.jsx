@@ -1,10 +1,12 @@
 import React from 'react';
 import Account from "./Account";
 
-const AccountList = ({accounts}) => {
+const AccountList = ({accounts, accountClicked}) => {
   return (
-    <div className="account-list" >
-      {accounts.map(account => <Account key={account._id} account={account} />)}
+    <div className="account-list">
+      {accounts.map(account => <Account clicked={() => {
+        accountClicked(account)
+      }} key={account._id} account={account}/>)}
     </div>
   );
 };

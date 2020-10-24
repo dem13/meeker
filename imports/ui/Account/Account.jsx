@@ -1,8 +1,8 @@
 import React from 'react';
 
-const Account = ({account}) => {
+const Account = ({account, clicked}) => {
   return (
-    <div className="account-item">
+    <div className="account-item" onClick={clicked}>
       <div className="account-item-title">
         {account.title}
       </div>

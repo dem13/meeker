@@ -1,8 +1,17 @@
 import {check} from "meteor/check";
 import {AccountsCollection} from "../db/AccountsCollection";
-import {encrypt} from '../helpers/encryptor';
+import {decrypt, encrypt} from '../helpers/encryptor';
 
 Meteor.methods({
+  async 'accounts.decrypt'({_id, secret}) {
+    check(_id, String);
+    check(secret, String);
+
+    const account = AccountsCollection.findOne({_id, userId: Meteor.userId()})
+
+    return await decrypt(account.password, secret);
+  },
+
   async 'accounts.insert'(accountData) {
     check(accountData, {
       title: String,
