@@ -27,7 +27,7 @@ const AccountPanel = ({account}) => {
           setShow(false);
           setSecret("");
           setInvalidSecret(false);
-          setPassword(hash);
+          setPassword(atob(hash));
         } else if (err.error === "accounts.decrypt.bad_decrypt") {
           setInvalidSecret(true);
           setPassword("");

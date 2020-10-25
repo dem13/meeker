@@ -10,7 +10,9 @@ Meteor.methods({
     const account = AccountsCollection.findOne({_id, userId: Meteor.userId()})
 
     try {
-      return await decrypt(account.password, secret);
+      const password = await decrypt(account.password, secret);
+
+      return Buffer.from(password).toString('base64');
     } catch (err) {
       throw new Meteor.Error('accounts.decrypt.bad_decrypt');
     }
