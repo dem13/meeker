@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 
-const AccountPanel = ({account}) => {
+const AccountPanel = ({account, removed}) => {
   const [password, setPassword] = useState("");
   const [secret, setSecret] = useState("");
   const [show, setShow] = useState(false);
@@ -50,6 +50,16 @@ const AccountPanel = ({account}) => {
     setShow(!show);
   };
 
+  const onDeleteClickHandler = () => {
+    if (confirm('You really want to delete account?')) {
+      Meteor.call('accounts.remove', account._id, (err, res) => {
+        if (!err) {
+          removed();
+        }
+      })
+    }
+  }
+
   return (
     <div className="account-panel">
       <div className="account-panel-decryption">
@@ -74,6 +84,12 @@ const AccountPanel = ({account}) => {
             </div>
           </div>
         }
+      </div>
+
+      <div className="account-panel-bottom">
+        <div className="account-panel-bottom-item">
+          <button onClick={onDeleteClickHandler} className="account-panel-delete-btn">Delete</button>
+        </div>
       </div>
 
     </div>

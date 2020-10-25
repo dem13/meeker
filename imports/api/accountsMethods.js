@@ -38,5 +38,11 @@ Meteor.methods({
       createdAt: new Date,
       userId: this.userId,
     });
+  },
+
+  async 'accounts.remove' (_id) {
+    check(_id, String);
+
+    return AccountsCollection.remove({_id, userId: Meteor.userId()});
   }
 });

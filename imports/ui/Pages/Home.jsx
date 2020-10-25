@@ -42,6 +42,11 @@ const Home = () => {
     setShowAccountModal(false);
   }
 
+  const accountRemovedHandler = () => {
+    setSelectedAccount(null)
+    setShowAccountModal(false);
+  }
+
   return (
     <div className="home">
       <AccountSearchInput search={search} changed={searchChangeHandler}/>
@@ -49,7 +54,7 @@ const Home = () => {
       <AccountList accountClicked={accountClickedHandler} accounts={accounts}/>
 
       <AccountModal show={showAccountModal} closed={accountModalClosedHandler}>
-        {selectedAccount ? <AccountPanel account={selectedAccount}/> : null}
+        {selectedAccount ? <AccountPanel account={selectedAccount} removed={accountRemovedHandler}/> : null}
       </AccountModal>
     </div>
   );

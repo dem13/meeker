@@ -42,6 +42,7 @@ button {
     transition: color .25s, background-color .25s;
     font-size: 18px;
     font-weight: bold;
+    outline: none!important;
 }
 
 button:hover {
@@ -297,4 +298,24 @@ main {
     transition: transform .25s;
     font-weight: bold;
     -webkit-user-select: none;
+}
+
+.account-panel-bottom {
+    position: absolute;
+    display: flex;
+    width: 100%;
+    left: 0;
+    bottom: 0;
+    justify-content: flex-end;
+}
+
+.account-panel-delete-btn {
+    border: 3px solid #ff1b1c;
+    background: #ff1b1c;
+    color: #e2e8ce;
+}
+
+.account-panel-delete-btn:hover {
+    background: #e2e8ce;
+    color: #ff1b1c;
 }
