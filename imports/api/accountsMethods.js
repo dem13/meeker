@@ -9,7 +9,11 @@ Meteor.methods({
 
     const account = AccountsCollection.findOne({_id, userId: Meteor.userId()})
 
-    return await decrypt(account.password, secret);
+    try {
+      return await decrypt(account.password, secret);
+    } catch (err) {
+      throw new Meteor.Error('accounts.decrypt.bad_decrypt');
+    }
   },
 
   async 'accounts.insert'(accountData) {

@@ -4,14 +4,20 @@ const AccountPanel = ({account}) => {
   const [password, setPassword] = useState("");
   const [secret, setSecret] = useState("");
   const [show, setShow] = useState(false);
-
+  const [invalidSecret, setInvalidSecret] = useState(false);
 
   const passwordClasses = ["account-panel-password"];
 
+  const secretClasses = ['account-panel-secret'];
+
   const canCopy = navigator.clipboard !== undefined;
 
-  if(canCopy) {
+  if (canCopy) {
     passwordClasses.push('copy')
+  }
+
+  if (invalidSecret) {
+    secretClasses.push('invalid');
   }
 
   const keyDownHandler = (e) => {
@@ -20,8 +26,10 @@ const AccountPanel = ({account}) => {
         if (!err && hash !== "") {
           setShow(false);
           setSecret("");
+          setInvalidSecret(false);
           setPassword(hash);
-        } else {
+        } else if (err.error === "accounts.decrypt.bad_decrypt") {
+          setInvalidSecret(true);
           setPassword("");
         }
       });
@@ -30,12 +38,12 @@ const AccountPanel = ({account}) => {
 
   const onChangeHandler = e => setSecret(e.target.value);
 
-  const onClickHandler = () => {
-    if(show && canCopy) {
+  const onPasswordClickHandler = () => {
+    if (show && canCopy) {
       navigator.clipboard.writeText(password).catch(err => console.log(err));
     }
 
-    if(!canCopy) {
+    if (!canCopy) {
       return setShow(true);
     }
 
@@ -45,7 +53,7 @@ const AccountPanel = ({account}) => {
   return (
     <div className="account-panel">
       <div className="account-panel-decryption">
-        <div className="account-panel-secret">
+        <div className={secretClasses.join(' ')}>
           <input
             type="password"
             name="secret"
@@ -55,10 +63,10 @@ const AccountPanel = ({account}) => {
             placeholder="Secret"/>
         </div>
         {password === "" ? null :
-          <div className="account-panel-decrypted" onClick={onClickHandler}>
+          <div className="account-panel-decrypted" onClick={onPasswordClickHandler}>
             <div className={passwordClasses.join(' ')}>
               <div className="account-panel-password-text">
-                {show ? password: password.split("").map(c => "*")}
+                {show ? password : password.split("").map(c => "*")}
               </div>
               <div className="account-panel-password-replace">
                 {show ? "Copy" : "Show"}

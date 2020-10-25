@@ -242,7 +242,14 @@ main {
 }
 
 .account-panel {
+    position: relative;
     min-height: 400px;
+}
+
+.account-panel-secret.invalid input {
+    border: 3px solid #ff1b1c;
+    box-shadow: 0 0 10px #ff1b1c;
+    color: #ff1b1c;
 }
 
 .account-panel-decryption {
