@@ -51,7 +51,7 @@ const AccountForm = ({created}) => {
           placeholder="Title"
           value={account.title}
           onChange={e => setAccount({...account, title: e.target.value})}
-          autoComplete={false}
+          autoComplete="new-password"
           required/>
       </div>
 
@@ -62,7 +62,7 @@ const AccountForm = ({created}) => {
           placeholder="Password"
           value={account.password}
           onChange={e => setAccount({...account, password: e.target.value})}
-          autoComplete={false}
+          autoComplete="new-password"
           required/>
       </div>
 
@@ -76,7 +76,7 @@ const AccountForm = ({created}) => {
             checkConfirm();
             return setAccount({...account, secret: e.target.value})
           }}
-          autoComplete={false}
+          autoComplete="new-password"
           required/>
       </div>
 
@@ -91,7 +91,7 @@ const AccountForm = ({created}) => {
             checkConfirm();
             return setAccount({...account, secret_confirm: e.target.value})
           }}
-          autoComplete={false}
+          autoComplete="new-password"
           required/>
       </div>
 

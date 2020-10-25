@@ -70,7 +70,7 @@ const AccountPanel = ({account, removed}) => {
             value={secret}
             onKeyDown={keyDownHandler}
             onChange={onChangeHandler}
-            autoComplete={false}
+            autoComplete="new-password"
             placeholder="Secret"/>
         </div>
         {password === "" ? null :
