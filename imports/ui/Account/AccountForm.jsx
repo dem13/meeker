@@ -1,4 +1,5 @@
 import React, {useState} from 'react';
+import crypto from 'crypto-browserify'
 
 const AccountForm = ({created}) => {
   const [account, setAccount] = useState({
@@ -24,6 +25,8 @@ const AccountForm = ({created}) => {
     }
 
     delete account.secret_confirm;
+
+    account.secret = crypto.createHash('sha256').update(account.secret).digest('hex');
 
     Meteor.call('accounts.insert', account);
 

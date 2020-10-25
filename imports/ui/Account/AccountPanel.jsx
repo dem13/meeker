@@ -1,4 +1,5 @@
 import React, {useState} from 'react';
+import crypto from "crypto-browserify";
 
 const AccountPanel = ({account, removed}) => {
   const [password, setPassword] = useState("");
@@ -22,7 +23,10 @@ const AccountPanel = ({account, removed}) => {
 
   const keyDownHandler = (e) => {
     if (e.key === 'Enter' && secret !== "") {
-      return Meteor.call('accounts.decrypt', {_id: account._id, secret}, (err, hash) => {
+
+      const hex = crypto.createHash('sha256').update(secret).digest('hex');
+
+      return Meteor.call('accounts.decrypt', {_id: account._id, secret: hex}, (err, hash) => {
         if (!err && hash !== "") {
           setShow(false);
           setSecret("");
