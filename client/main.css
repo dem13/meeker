@@ -237,6 +237,12 @@ main {
     margin-bottom: 20px;
 }
 
+.account-form-row input.invalid {
+    border: 3px solid #ff1b1c;
+    box-shadow: 0 0 10px #ff1b1c;
+    color: #ff1b1c;
+}
+
 .account-form-header {
     font-family: Bungee, sans-serif;
     font-size: 34px;
